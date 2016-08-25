@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('Testing:server');
+var http = require('http');
+var path = require('path');
+
+var fs = require('fs');
+var https = require('https');
+var filename = "./public/server.key";
+var filename2= "./public/server.crt";
+var options = {
+    key  : fs.readFileSync(path.resolve(filename)),
+    cert : fs.readFileSync(path.resolve(filename2))
+};
+
+
+
+https.createServer(options, app).listen(8000, function () {
+    console.log('Started!');
+});
+
+
